@@ -6,20 +6,20 @@
   "arrowParens": "avoid",
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
+
+    "^@/app/(.*)$",
     "^@/pages/(.*)$",
-    "^@/layout/(.*)$",
-    "^@/components/(.*)$",
-    "^@/constants/(.*)$",
-    "^@/types/(.*)$",
-    "^@/assets/(.*)$",
-    "^@/config/(.*)$",
-    "^@/store/(.*)$",
-    "^@/hooks/(.*)$",
-    "^@/utils/(.*)$",
+    "^@/features/(.*)$",
     "^@/api/(.*)$",
-    "^../(.*)",
-    "^./(.*)",
-    "(.scss)$"
+
+    "^@/shared/(.*)$",
+
+    "^@/assets/(.*)$",
+
+    "^../(.*)$",
+    "^./(.*)$",
+
+    "\\.(css|scss)$"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
