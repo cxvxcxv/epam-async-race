@@ -50,5 +50,13 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
+
+    'no-param-reassign': [
+      'error',
+      {
+        props: true,
+        ignorePropertyModificationsFor: ['state'],
+      },
+    ],
   },
 };
