@@ -3,6 +3,3 @@ export interface Car {
   name: string;
   color: string;
 }
-
-export type CreateCarDto = Omit<Car, 'id'>;
-export type UpdateCarDto = Partial<Car>;

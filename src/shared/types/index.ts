@@ -1,4 +1,2 @@
-export * from './car'
-export * from './engine'
-export * from './winner'
-
+export * from './car';
+export * from './winner';
