@@ -19,6 +19,10 @@ module.exports = {
   extends: ['airbnb', 'airbnb/hooks', 'airbnb-typescript', 'prettier'],
 
   settings: {
+    'import/resolver': {
+      typescript: true,
+    },
+
     react: {
       version: 'detect',
     },
