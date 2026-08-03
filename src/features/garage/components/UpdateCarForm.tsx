@@ -1,0 +1,78 @@
+import { useAppDispatch, useAppSelector } from '@/app/store';
+import { Button, Input } from '@/shared/ui';
+import { type SubmitEventHandler } from 'react';
+import { validateName } from '../lib/validate';
+import { selectSelectedCarId, selectUpdateDraft } from '../selectors';
+import { resetUpdateDraft, selectCar, updateUpdateDraft } from '../slice';
+import { updateCar } from '../thunks';
+
+export function UpdateCarForm() {
+  const dispatch = useAppDispatch();
+
+  const selectedCarId = useAppSelector(selectSelectedCarId);
+
+  const draft = useAppSelector(selectUpdateDraft);
+
+  const error = validateName(draft.name);
+
+  const disabled = selectedCarId === null;
+
+  const handleSubmit: SubmitEventHandler<HTMLFormElement> = async event => {
+    event.preventDefault();
+
+    if (disabled || error) {
+      return;
+    }
+
+    await dispatch(
+      updateCar({
+        id: selectedCarId,
+        car: {
+          name: draft.name.trim(),
+          color: draft.color,
+        },
+      }),
+    );
+
+    dispatch(selectCar(null));
+
+    dispatch(resetUpdateDraft());
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-wrap items-end gap-3">
+      <Input
+        label="Edit car"
+        value={draft.name}
+        disabled={disabled}
+        placeholder="Car name"
+        error={error}
+        onChange={({ target }) =>
+          dispatch(
+            updateUpdateDraft({
+              name: target.value,
+            }),
+          )
+        }
+      />
+
+      <Input
+        type="color"
+        value={draft.color}
+        disabled={disabled}
+        className="h-11 w-16 cursor-pointer p-1"
+        onChange={({ target }) =>
+          dispatch(
+            updateUpdateDraft({
+              color: target.value,
+            }),
+          )
+        }
+      />
+
+      <Button type="submit" disabled={disabled || !!error}>
+        Update
+      </Button>
+    </form>
+  );
+}

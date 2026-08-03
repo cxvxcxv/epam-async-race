@@ -14,9 +14,12 @@ const initialState: GarageState = {
 
   createDraft: {
     name: '',
+    color: '#000000',
+  },
+  updateDraft: {
+    name: '',
     color: '',
   },
-  updateDraft: {},
 
   isFetching: false,
   isCreating: false,
@@ -35,12 +38,47 @@ export const garageSlice = createSlice({
 
     selectCar(state, action: PayloadAction<number | null>) {
       state.selectedCarId = action.payload;
+
+      if (action.payload === null) {
+        state.updateDraft = {
+          name: '',
+          color: '',
+        };
+
+        return;
+      }
+
+      const selectedCar = state.cars.find(car => car.id === action.payload);
+
+      if (!selectedCar) {
+        return;
+      }
+
+      state.updateDraft = {
+        name: selectedCar.name,
+        color: selectedCar.color,
+      };
     },
-    setCreateDraft(state, action: PayloadAction<CreateCarDto>) {
-      state.createDraft = action.payload;
+    updateCreateDraft(state, action: PayloadAction<Partial<CreateCarDto>>) {
+      state.createDraft = {
+        ...state.createDraft,
+        ...action.payload,
+      };
     },
-    setUpdateDraft(state, action: PayloadAction<UpdateCarDto>) {
-      state.updateDraft = action.payload;
+    resetCreateDraft(state) {
+      state.createDraft = { name: '', color: '#000000' };
+    },
+    updateUpdateDraft(state, action: PayloadAction<Partial<UpdateCarDto>>) {
+      state.updateDraft = {
+        ...state.updateDraft,
+        ...action.payload,
+      };
+    },
+    resetUpdateDraft(state) {
+      state.updateDraft = {
+        name: '',
+        color: '',
+      };
     },
   },
 
@@ -96,6 +134,13 @@ export const garageSlice = createSlice({
         if (index !== -1) {
           state.cars[index] = action.payload;
         }
+
+        if (state.selectedCarId === action.payload.id) {
+          state.updateDraft = {
+            name: action.payload.name,
+            color: action.payload.color,
+          };
+        }
       })
 
       .addCase(updateCar.rejected, (state, action) => {
@@ -124,7 +169,13 @@ export const garageSlice = createSlice({
   },
 });
 
-export const { setCurrentPage, selectCar, setCreateDraft, setUpdateDraft } =
-  garageSlice.actions;
+export const {
+  setCurrentPage,
+  selectCar,
+  updateCreateDraft,
+  resetCreateDraft,
+  updateUpdateDraft,
+  resetUpdateDraft,
+} = garageSlice.actions;
 
 export const garageReducer = garageSlice.reducer;
