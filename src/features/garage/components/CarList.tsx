@@ -16,10 +16,12 @@ export function CarList() {
   }
 
   return (
-    <div>
+    <ul>
       {cars.map(car => (
-        <CarItem key={car.id} car={car} />
+        <li key={car.id}>
+          <CarItem car={car} />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }

@@ -1,10 +1,11 @@
 import { carsApi } from '@/api/cars';
-import type { CreateCarDto } from '@/api/cars/types';
+import type { CreateCarDto, GetCarsResponse } from '@/api/cars/types';
+import { winnersApi } from '@/api/winners';
 import { GARAGE_PAGE_SIZE } from '@/shared/constants';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { UpdateCarPayload } from './types';
 
-export const fetchCars = createAsyncThunk(
+export const fetchCars = createAsyncThunk<GetCarsResponse, number>(
   'garage/fetchCars',
   async (page: number) => carsApi.getCars({ page, limit: GARAGE_PAGE_SIZE }),
 );
@@ -22,7 +23,10 @@ export const updateCar = createAsyncThunk(
 export const deleteCar = createAsyncThunk(
   'garage/deleteCar',
   async (id: number) => {
-    await carsApi.deleteCar(id);
+    await Promise.allSettled([
+      carsApi.deleteCar(id),
+      winnersApi.deleteWinner(id),
+    ]);
 
     return id;
   },

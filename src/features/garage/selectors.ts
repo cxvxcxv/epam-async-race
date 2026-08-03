@@ -8,6 +8,10 @@ export const selectGarageTotalCount = (state: RootState) =>
 export const selectGarageCurrentPage = (state: RootState) =>
   state.garage.currentPage;
 
-export const selectGarageLoading = (state: RootState) => state.garage.isLoading;
+export const selectGarageLoading = (state: RootState) =>
+  state.garage.isFetching;
 
 export const selectGarageError = (state: RootState) => state.garage.error;
+
+export const selectSelectedCarId = (state: RootState) =>
+  state.garage.selectedCarId;
