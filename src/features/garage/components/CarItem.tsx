@@ -1,12 +1,26 @@
+import { useAppDispatch, useAppSelector } from '@/app/store';
 import type { Car } from '@/shared/types';
+import { Button } from '@/shared/ui';
+import clsx from 'clsx';
+import { selectSelectedCarId } from '../selectors';
+import { selectCar } from '../slice';
+import { deleteCar } from '../thunks';
 
 interface Props {
   car: Car;
 }
 
 export function CarItem({ car }: Props) {
+  const dispatch = useAppDispatch();
+  const selectedCarId = useAppSelector(selectSelectedCarId);
+  const isSelected = selectedCarId === car.id;
   return (
-    <article>
+    <article
+      className={clsx(
+        'rounded-lg border p-4',
+        isSelected ? 'border-primary' : 'border-border',
+      )}
+    >
       <h2>{car.name}</h2>
 
       <div
@@ -17,11 +31,15 @@ export function CarItem({ car }: Props) {
         }}
       />
 
-      <button type="button">Select</button>
+      <Button variant="secondary" onClick={() => dispatch(selectCar(car.id))}>
+        Select
+      </Button>
 
-      <button type="button">Delete</button>
+      <Button variant="danger" onClick={() => dispatch(deleteCar(car.id))}>
+        Delete
+      </Button>
 
-      <button type="button">Start</button>
+      <Button type="button">Start</Button>
     </article>
   );
 }

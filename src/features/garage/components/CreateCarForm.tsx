@@ -34,8 +34,9 @@ export function CreateCarForm() {
     <form onSubmit={handleSubmit} className="flex flex-wrap items-end gap-3">
       <Input
         value={draft.name}
+        label="Create car"
         placeholder="Car name"
-        error={error}
+        error={draft.name ? error : null}
         onChange={e => dispatch(updateCreateDraft({ name: e.target.value }))}
       />
 

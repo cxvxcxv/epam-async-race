@@ -11,4 +11,4 @@ export interface GetCarsResponse {
 }
 
 export type CreateCarDto = Omit<Car, 'id'>;
-export type UpdateCarDto = Partial<Car>;
+export type UpdateCarDto = Omit<Car, 'id'>;

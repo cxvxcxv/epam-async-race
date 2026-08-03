@@ -1,6 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import {
-  CarForm,
   CarList,
   CreateCarForm,
   fetchCars,
@@ -24,7 +23,6 @@ export function GaragePage() {
     <section>
       <h1>Garage</h1>
 
-      <CarForm />
       <CreateCarForm />
       <UpdateCarForm />
 

@@ -1,11 +1,11 @@
 import { useAppSelector } from '@/app/store';
-import { selectCars, selectGarageLoading } from '../selectors';
+import { selectCars, selectIsFetching } from '../selectors';
 
 import { CarItem } from './CarItem';
 
 export function CarList() {
   const cars = useAppSelector(selectCars);
-  const isLoading = useAppSelector(selectGarageLoading);
+  const isLoading = useAppSelector(selectIsFetching);
 
   if (isLoading) {
     return <p>Loading cars...</p>;

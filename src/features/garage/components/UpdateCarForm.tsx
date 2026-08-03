@@ -46,28 +46,15 @@ export function UpdateCarForm() {
         value={draft.name}
         disabled={disabled}
         placeholder="Car name"
-        error={error}
-        onChange={({ target }) =>
-          dispatch(
-            updateUpdateDraft({
-              name: target.value,
-            }),
-          )
-        }
+        error={draft.name ? error : null}
+        onChange={e => dispatch(updateUpdateDraft({ name: e.target.value }))}
       />
 
       <Input
         type="color"
         value={draft.color}
         disabled={disabled}
-        className="h-11 w-16 cursor-pointer p-1"
-        onChange={({ target }) =>
-          dispatch(
-            updateUpdateDraft({
-              color: target.value,
-            }),
-          )
-        }
+        onChange={e => dispatch(updateUpdateDraft({ color: e.target.value }))}
       />
 
       <Button type="submit" disabled={disabled || !!error}>
