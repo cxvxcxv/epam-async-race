@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import { Button, Input } from '@/shared/ui';
 import { type SubmitEventHandler } from 'react';
+import toast from 'react-hot-toast';
 import { validateName } from '../lib/validate';
 import { selectCreateDraft } from '../selectors';
 import { resetCreateDraft, updateCreateDraft } from '../slice';
@@ -28,22 +29,25 @@ export function CreateCarForm() {
     );
 
     dispatch(resetCreateDraft());
+    toast.success('Successfully created!');
   };
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-wrap items-end gap-3">
-      <Input
-        value={draft.name}
-        placeholder="Car name"
-        error={draft.name ? error : null}
-        onChange={e => dispatch(updateCreateDraft({ name: e.target.value }))}
-      />
+      <div className="flex gap-2">
+        <Input
+          value={draft.name}
+          placeholder="Car name"
+          error={draft.name ? error : null}
+          onChange={e => dispatch(updateCreateDraft({ name: e.target.value }))}
+        />
 
-      <Input
-        value={draft.color}
-        type="color"
-        onChange={e => dispatch(updateCreateDraft({ color: e.target.value }))}
-      />
+        <Input
+          value={draft.color}
+          type="color"
+          onChange={e => dispatch(updateCreateDraft({ color: e.target.value }))}
+        />
+      </div>
 
       <Button type="submit" disabled={!!error}>
         Create
