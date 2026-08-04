@@ -15,7 +15,7 @@ export function RaceControls() {
   };
 
   return (
-    <header className="mb-4 flex flex-col items-center justify-between lg:flex-row">
+    <header className="flex flex-col items-center justify-between lg:flex-row">
       <div className="flex gap-2">
         <Button>Race</Button>
         <Button>Reset</Button>

@@ -2,8 +2,15 @@ import { useAppDispatch, useAppSelector } from '@/app/store';
 import type { Car } from '@/shared/types';
 import { Button } from '@/shared/ui';
 import clsx from 'clsx';
-import { selectSelectedCarId } from '../selectors';
-import { selectCar } from '../slice';
+
+import { GARAGE_PAGE_SIZE } from '@/shared/constants';
+
+import {
+  selectGarageCurrentPage,
+  selectGarageTotalCount,
+  selectSelectedCarId,
+} from '../selectors';
+import { selectCar, setCurrentPage } from '../slice';
 import { deleteCar } from '../thunks';
 
 interface Props {
@@ -12,8 +19,23 @@ interface Props {
 
 export function CarItem({ car }: Props) {
   const dispatch = useAppDispatch();
+
   const selectedCarId = useAppSelector(selectSelectedCarId);
+  const currentPage = useAppSelector(selectGarageCurrentPage);
+  const totalCount = useAppSelector(selectGarageTotalCount);
+
   const isSelected = selectedCarId === car.id;
+
+  const handleDelete = async () => {
+    await dispatch(deleteCar(car.id)).unwrap();
+
+    const isLastCarOnPage = totalCount % GARAGE_PAGE_SIZE === 1;
+
+    if (isLastCarOnPage && currentPage > 1) {
+      dispatch(setCurrentPage(currentPage - 1));
+    }
+  };
+
   return (
     <article
       className={clsx(
@@ -39,11 +61,7 @@ export function CarItem({ car }: Props) {
         Select
       </Button>
 
-      <Button
-        size="sm"
-        variant="danger"
-        onClick={() => dispatch(deleteCar(car.id))}
-      >
+      <Button size="sm" variant="danger" onClick={handleDelete}>
         Delete
       </Button>
 

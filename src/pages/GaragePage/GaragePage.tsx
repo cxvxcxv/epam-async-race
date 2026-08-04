@@ -1,26 +1,35 @@
+import { useEffect } from 'react';
+
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import {
   CarList,
   fetchCars,
   GaragePagination,
   RaceControls,
+  selectCars,
   selectGarageCurrentPage,
+  selectGarageTotalCount,
 } from '@/features/garage';
-import { useEffect } from 'react';
 
 export function GaragePage() {
   const dispatch = useAppDispatch();
 
-  const page = useAppSelector(selectGarageCurrentPage);
+  const cars = useAppSelector(selectCars);
+  const currentPage = useAppSelector(selectGarageCurrentPage);
+  const totalCount = useAppSelector(selectGarageTotalCount);
 
   useEffect(() => {
-    dispatch(fetchCars(page));
-  }, [dispatch, page]);
+    dispatch(fetchCars(currentPage));
+  }, [dispatch, currentPage]);
+
+  useEffect(() => {
+    if (cars.length === 0 && currentPage === 1 && totalCount > 0) {
+      dispatch(fetchCars(1));
+    }
+  }, [cars.length, currentPage, totalCount, dispatch]);
 
   return (
-    <section>
-      <h1>Garage</h1>
-
+    <section className="flex flex-col gap-4">
       <RaceControls />
 
       <CarList />

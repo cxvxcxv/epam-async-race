@@ -45,7 +45,7 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
     <button
       ref={ref}
       // eslint-disable-next-line react/button-has-type
-      type={type}
+      type={type || 'button'}
       disabled={disabled || loading}
       className={cn(
         'inline-flex cursor-pointer items-center justify-center rounded-md font-medium transition-colors',

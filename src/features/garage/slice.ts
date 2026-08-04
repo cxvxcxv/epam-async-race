@@ -1,6 +1,8 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import type { CreateCarDto, UpdateCarDto } from '@/api/cars';
+import { getTotalPages } from '@/api/helpers/pagination';
+import { GARAGE_PAGE_SIZE } from '@/shared/constants';
 import {
   createCar,
   deleteCar,
@@ -164,8 +166,13 @@ export const garageSlice = createSlice({
         state.isDeleting = false;
 
         state.cars = state.cars.filter(car => car.id !== action.payload);
-
         state.totalCount = Math.max(0, state.totalCount - 1);
+
+        const totalPages = getTotalPages(state.totalCount, GARAGE_PAGE_SIZE);
+        state.currentPage = Math.max(
+          1,
+          Math.min(state.currentPage, totalPages),
+        );
       })
 
       .addCase(deleteCar.rejected, (state, action) => {
