@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import type { Car } from '@/shared/types';
-import { Button } from '@/shared/ui';
+import { Button, CarIcon } from '@/shared/ui';
 import clsx from 'clsx';
 
 import { GARAGE_PAGE_SIZE } from '@/shared/constants';
@@ -45,13 +45,7 @@ export function CarItem({ car }: Props) {
     >
       <h2>{car.name}</h2>
 
-      <div
-        style={{
-          width: 50,
-          height: 50,
-          backgroundColor: car.color,
-        }}
-      />
+      <CarIcon color={car.color} />
 
       <Button
         variant="secondary"
