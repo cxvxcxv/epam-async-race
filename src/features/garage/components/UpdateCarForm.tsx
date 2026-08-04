@@ -42,7 +42,6 @@ export function UpdateCarForm() {
   return (
     <form onSubmit={handleSubmit} className="flex flex-wrap items-end gap-3">
       <Input
-        label="Edit car"
         value={draft.name}
         disabled={disabled}
         placeholder="Car name"

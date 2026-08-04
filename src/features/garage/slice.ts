@@ -1,7 +1,13 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import type { CreateCarDto, UpdateCarDto } from '@/api/cars';
-import { createCar, deleteCar, fetchCars, updateCar } from './thunks';
+import {
+  createCar,
+  deleteCar,
+  fetchCars,
+  generateRandomCarsThunk,
+  updateCar,
+} from './thunks';
 
 import type { GarageState } from './types';
 
@@ -164,6 +170,25 @@ export const garageSlice = createSlice({
 
       .addCase(deleteCar.rejected, (state, action) => {
         state.isDeleting = false;
+        state.error = action.error.message ?? 'Unknown error';
+      })
+
+      // generate random cars
+      .addCase(generateRandomCarsThunk.pending, state => {
+        state.isCreating = true;
+        state.error = null;
+      })
+
+      .addCase(generateRandomCarsThunk.fulfilled, (state, action) => {
+        state.isCreating = false;
+
+        if (action.payload.failedCount > 0) {
+          state.error = `${action.payload.failedCount} car(s) failed to generate`;
+        }
+      })
+
+      .addCase(generateRandomCarsThunk.rejected, (state, action) => {
+        state.isCreating = false;
         state.error = action.error.message ?? 'Unknown error';
       });
   },

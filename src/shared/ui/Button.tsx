@@ -1,7 +1,8 @@
 import { forwardRef, type ButtonHTMLAttributes } from 'react';
 import { cn } from '../utils';
 
-type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'success' | 'ghost';
+type ButtonVariant =
+  'primary' | 'secondary' | 'danger' | 'success' | 'ghost' | 'outline';
 
 type ButtonSize = 'sm' | 'md' | 'lg';
 
@@ -18,6 +19,7 @@ const variants: Record<ButtonVariant, string> = {
   danger: 'bg-danger text-white hover:brightness-110',
   success: 'bg-success text-white hover:brightness-110',
   ghost: 'bg-transparent text-foreground hover:bg-surface',
+  outline: 'border-2 border-primary bg-transparent text-primary',
 };
 
 const sizes: Record<ButtonSize, string> = {
@@ -31,7 +33,7 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
     {
       type,
       className,
-      variant = 'primary',
+      variant = 'outline',
       size = 'md',
       loading = false,
       disabled,
@@ -46,8 +48,8 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
       type={type}
       disabled={disabled || loading}
       className={cn(
-        'inline-flex items-center justify-center rounded-md font-medium transition-colors',
-        'disabled:cursor-not-allowed disabled:opacity-50',
+        'inline-flex cursor-pointer items-center justify-center rounded-md font-medium transition-colors',
+        'disabled:border-disabled disabled:text-disabled-foreground disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent',
         'focus:ring-ring focus:ring-2 focus:outline-none',
         variants[variant],
         sizes[size],

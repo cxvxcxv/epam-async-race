@@ -31,15 +31,24 @@ export function CarItem({ car }: Props) {
         }}
       />
 
-      <Button variant="secondary" onClick={() => dispatch(selectCar(car.id))}>
+      <Button
+        variant="secondary"
+        size="sm"
+        onClick={() => dispatch(selectCar(car.id))}
+      >
         Select
       </Button>
 
-      <Button variant="danger" onClick={() => dispatch(deleteCar(car.id))}>
+      <Button
+        size="sm"
+        variant="danger"
+        onClick={() => dispatch(deleteCar(car.id))}
+      >
         Delete
       </Button>
 
-      <Button type="button">Start</Button>
+      <Button size="sm">A</Button>
+      <Button size="sm">B</Button>
     </article>
   );
 }

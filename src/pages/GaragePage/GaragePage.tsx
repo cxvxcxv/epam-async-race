@@ -1,12 +1,10 @@
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import {
   CarList,
-  CreateCarForm,
   fetchCars,
   GaragePagination,
   RaceControls,
   selectGarageCurrentPage,
-  UpdateCarForm,
 } from '@/features/garage';
 import { useEffect } from 'react';
 
@@ -22,9 +20,6 @@ export function GaragePage() {
   return (
     <section>
       <h1>Garage</h1>
-
-      <CreateCarForm />
-      <UpdateCarForm />
 
       <RaceControls />
 

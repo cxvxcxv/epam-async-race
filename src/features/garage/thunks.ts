@@ -1,8 +1,9 @@
 import { carsApi } from '@/api/cars';
 import type { CreateCarDto, GetCarsResponse } from '@/api/cars/types';
 import { winnersApi } from '@/api/winners';
-import { GARAGE_PAGE_SIZE } from '@/shared/constants';
+import { GARAGE_PAGE_SIZE, RANDOM_CAR_COUNT } from '@/shared/constants';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { generateRandomCars } from './lib/randomCar';
 import type { UpdateCarPayload } from './types';
 
 export const fetchCars = createAsyncThunk<GetCarsResponse, number>(
@@ -31,3 +32,18 @@ export const deleteCar = createAsyncThunk(
     return id;
   },
 );
+
+export const generateRandomCarsThunk = createAsyncThunk<{
+  createdCount: number;
+  failedCount: number;
+}>('garage/generateRandomCars', async () => {
+  const drafts = generateRandomCars(RANDOM_CAR_COUNT);
+  const results = await Promise.allSettled(
+    drafts.map(draft => carsApi.createCar(draft)),
+  );
+
+  const createdCount = results.filter(r => r.status === 'fulfilled').length;
+  const failedCount = results.length - createdCount;
+
+  return { createdCount, failedCount };
+});
