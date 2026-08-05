@@ -1,66 +1,43 @@
-import { useAppDispatch, useAppSelector } from '@/app/store';
+import { useAppSelector } from '@/app/store';
 import type { Car } from '@/shared/types';
-import { Button, CarIcon } from '@/shared/ui';
+import { CarIcon } from '@/shared/ui';
 import clsx from 'clsx';
 
-import { GARAGE_PAGE_SIZE } from '@/shared/constants';
-
-import {
-  selectGarageCurrentPage,
-  selectGarageTotalCount,
-  selectSelectedCarId,
-} from '../selectors';
-import { selectCar, setCurrentPage } from '../slice';
-import { deleteCar } from '../thunks';
+import { selectSelectedCarId } from '../selectors';
+import { CarControls } from './CarControls';
 
 interface Props {
   car: Car;
 }
 
 export function CarItem({ car }: Props) {
-  const dispatch = useAppDispatch();
-
   const selectedCarId = useAppSelector(selectSelectedCarId);
-  const currentPage = useAppSelector(selectGarageCurrentPage);
-  const totalCount = useAppSelector(selectGarageTotalCount);
-
   const isSelected = selectedCarId === car.id;
 
-  const handleDelete = async () => {
-    await dispatch(deleteCar(car.id)).unwrap();
-
-    const isLastCarOnPage = totalCount % GARAGE_PAGE_SIZE === 1;
-
-    if (isLastCarOnPage && currentPage > 1) {
-      dispatch(setCurrentPage(currentPage - 1));
-    }
-  };
-
   return (
-    <article
+    <div
       className={clsx(
-        'rounded-lg border p-4',
-        isSelected ? 'border-primary' : 'border-border',
+        'border-border relative flex h-24 w-full items-center border-b transition-colors',
+        isSelected && 'bg-primary/5',
       )}
     >
-      <h2>{car.name}</h2>
+      <CarControls car={car} />
 
-      <CarIcon color={car.color} />
+      <div className="border-primary text-primary relative flex h-full items-center justify-center border-r-2 border-dashed px-1 pl-2 text-xs font-bold tracking-widest uppercase [writing-mode:vertical-lr]">
+        Start
+      </div>
 
-      <Button
-        variant="secondary"
-        size="sm"
-        onClick={() => dispatch(selectCar(car.id))}
-      >
-        Select
-      </Button>
+      <div className="relative flex h-full flex-1 items-center overflow-hidden px-4">
+        <span className="font-orbitron pointer-events-none absolute left-28 text-4xl font-extrabold tracking-widest text-slate-400/10 select-none">
+          {car.name}
+        </span>
 
-      <Button size="sm" variant="danger" onClick={handleDelete}>
-        Delete
-      </Button>
+        <CarIcon color={car.color} className="h-10 w-20" />
+      </div>
 
-      <Button size="sm">A</Button>
-      <Button size="sm">B</Button>
-    </article>
+      <div className="border-success text-success relative z-10 flex h-full items-center justify-center border-l-2 border-dashed px-1 text-xs font-bold tracking-widest [writing-mode:vertical-lr]">
+        Finish
+      </div>
+    </div>
   );
 }

@@ -43,25 +43,34 @@ export function UpdateCarForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-wrap items-end gap-3">
-      <div className="flex gap-2">
-        <Input
-          value={draft.name}
-          disabled={disabled}
-          placeholder="Car name"
-          error={draft.name ? error : null}
-          onChange={e => dispatch(updateUpdateDraft({ name: e.target.value }))}
-        />
+    <form
+      onSubmit={handleSubmit}
+      className="flex w-full flex-row items-center gap-2"
+    >
+      <Input
+        value={draft.name}
+        disabled={disabled}
+        placeholder="Car name"
+        error={draft.name ? error : null}
+        onChange={e => dispatch(updateUpdateDraft({ name: e.target.value }))}
+        className="w-full"
+        wrapperClassname="min-w-0 flex-1"
+      />
 
-        <Input
-          type="color"
-          value={draft.color}
-          disabled={disabled}
-          onChange={e => dispatch(updateUpdateDraft({ color: e.target.value }))}
-        />
-      </div>
+      <input
+        type="color"
+        value={draft.color}
+        disabled={disabled}
+        onChange={e => dispatch(updateUpdateDraft({ color: e.target.value }))}
+        className="h-10 w-10 shrink-0 cursor-pointer rounded border-0 p-0 disabled:cursor-not-allowed"
+      />
 
-      <Button type="submit" disabled={disabled || !!error}>
+      <Button
+        type="submit"
+        disabled={disabled || !!error}
+        variant="outline"
+        className="border-primary text-primary hover:bg-primary/10 shrink-0 whitespace-nowrap"
+      >
         Update
       </Button>
     </form>

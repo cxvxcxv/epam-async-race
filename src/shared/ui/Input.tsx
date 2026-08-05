@@ -4,11 +4,12 @@ import { forwardRef, type InputHTMLAttributes } from 'react';
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string | null;
+  wrapperClassname?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, label, error, id, ...props }, ref) => (
-    <div className="flex flex-col gap-1">
+  ({ wrapperClassname, className, label, error, id, ...props }, ref) => (
+    <div className={clsx('flex flex-col gap-1', wrapperClassname)}>
       {label && (
         <label htmlFor={id} className="text-foreground text-sm font-medium">
           {label}
