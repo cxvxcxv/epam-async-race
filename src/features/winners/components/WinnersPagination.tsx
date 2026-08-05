@@ -2,24 +2,27 @@ import { useAppDispatch, useAppSelector } from '@/app/store';
 
 import { getTotalPages } from '@/api/helpers';
 
-import { GARAGE_PAGE_SIZE } from '@/shared/constants';
+import { WINNERS_PAGE_SIZE } from '@/shared/constants';
 import { Pagination } from '@/shared/ui';
 
-import { selectGarageCurrentPage, selectGarageTotalCount } from '../selectors';
+import {
+  selectWinnersCurrentPage,
+  selectWinnersTotalCount,
+} from '../selectors';
 import { setCurrentPage } from '../slice';
-import { fetchCars } from '../thunks';
+import { fetchWinners } from '../thunks';
 
-export function GaragePagination() {
+export function WinnersPagination() {
   const dispatch = useAppDispatch();
 
-  const currentPage = useAppSelector(selectGarageCurrentPage);
-  const totalCount = useAppSelector(selectGarageTotalCount);
+  const currentPage = useAppSelector(selectWinnersCurrentPage);
+  const totalCount = useAppSelector(selectWinnersTotalCount);
 
-  const totalPages = getTotalPages(totalCount, GARAGE_PAGE_SIZE);
+  const totalPages = getTotalPages(totalCount, WINNERS_PAGE_SIZE);
 
   const handlePageChange = (newPage: number) => {
     dispatch(setCurrentPage(newPage));
-    dispatch(fetchCars(newPage));
+    dispatch(fetchWinners());
   };
 
   return (

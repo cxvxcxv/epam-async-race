@@ -26,13 +26,13 @@ export function RaceControls() {
         <div className="flex items-center gap-3">
           <Button
             variant="outline"
-            className="border-success text-success hover:bg-success/10 flex-1 uppercase sm:flex-none"
+            className="border-success text-success hover:bg-success/10 flex-1 sm:flex-none"
           >
             Race
           </Button>
           <Button
             variant="outline"
-            className="border-danger text-danger hover:bg-danger/10 flex-1 uppercase sm:flex-none"
+            className="border-danger text-danger hover:bg-danger/10 flex-1 sm:flex-none"
           >
             Reset
           </Button>
@@ -51,7 +51,7 @@ export function RaceControls() {
           <Button
             variant="outline"
             onClick={handleGenerateCars}
-            className="border-info text-info hover:bg-info/10 w-full whitespace-nowrap uppercase sm:w-auto"
+            className="border-info text-info hover:bg-info/10 w-full whitespace-nowrap sm:w-auto"
           >
             Generate cars
           </Button>
