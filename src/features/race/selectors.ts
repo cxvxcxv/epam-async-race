@@ -1,4 +1,5 @@
 import type { RootState } from '@/app/store';
+
 import type { CarRaceState } from './types';
 
 const DEFAULT_CAR_RACE_STATE: CarRaceState = {

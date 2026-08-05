@@ -1,8 +1,14 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
+
+import type { RootState } from '@/app/store';
+
 import { engineApi } from '@/api/engine';
 import { winnersApi } from '@/api/winners';
-import type { RootState } from '@/app/store';
+
 import type { Car } from '@/shared/types';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+
+import { showWinnerToast } from '../garage/lib/showWinnerToast';
+
 import {
   resetCarState,
   resetRace,
@@ -71,6 +77,7 @@ export const startSingleCar = createAsyncThunk<void, Car, { state: RootState }>(
             time: Number(elapsedTime.toFixed(2)),
           };
           dispatch(setRaceWinner(winner));
+          showWinnerToast(winner.name, winner.time);
           await saveOrUpdateWinner(winner);
         }
       }

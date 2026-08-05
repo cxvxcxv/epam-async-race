@@ -30,7 +30,15 @@ export const fetchWinners = createAsyncThunk<
           const car = await carsApi.getCar(winner.id);
           return { ...winner, car };
         } catch {
-          return { ...winner };
+          // fallback
+          return {
+            ...winner,
+            car: {
+              id: winner.id,
+              name: 'UNKNOWN CAR',
+              color: '#ffffff',
+            },
+          };
         }
       }),
     );

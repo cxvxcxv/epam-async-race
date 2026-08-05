@@ -1,5 +1,5 @@
 export type EngineStatus =
-  'stopped' | 'starting' | 'started' | 'driving' | 'broken' | 'finished';
+  'stopped' | 'starting' | 'driving' | 'broken' | 'finished';
 
 export interface CarRaceState {
   status: EngineStatus;

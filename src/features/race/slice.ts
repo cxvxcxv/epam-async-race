@@ -1,4 +1,5 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
+
 import type { EngineStatus, RaceState, RaceWinner } from './types';
 
 const initialState: RaceState = {

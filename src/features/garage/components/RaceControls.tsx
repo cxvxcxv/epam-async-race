@@ -2,9 +2,11 @@ import toast from 'react-hot-toast';
 
 import { useAppDispatch, useAppSelector } from '@/app/store';
 
+import { resetAllCars, selectIsRacing, startAllCars } from '@/features/race';
+
 import { Button } from '@/shared/ui';
 
-import { selectGarageCurrentPage } from '../selectors';
+import { selectCars, selectGarageCurrentPage } from '../selectors';
 import { fetchCars, generateRandomCarsThunk } from '../thunks';
 
 import { CreateCarForm } from './CreateCarForm';
@@ -13,6 +15,17 @@ import { UpdateCarForm } from './UpdateCarForm';
 export function RaceControls() {
   const dispatch = useAppDispatch();
   const currentPage = useAppSelector(selectGarageCurrentPage);
+  const cars = useAppSelector(selectCars);
+  const isRacing = useAppSelector(selectIsRacing);
+
+  const handleRace = () => {
+    if (cars.length === 0) return;
+    dispatch(startAllCars(cars));
+  };
+
+  const handleReset = () => {
+    dispatch(resetAllCars(cars));
+  };
 
   const handleGenerateCars = async () => {
     await dispatch(generateRandomCarsThunk());
@@ -26,12 +39,16 @@ export function RaceControls() {
         <div className="flex items-center gap-3">
           <Button
             variant="outline"
+            onClick={handleRace}
+            disabled={isRacing || cars.length === 0}
             className="border-success text-success hover:bg-success/10 flex-1 sm:flex-none"
           >
             Race
           </Button>
           <Button
             variant="outline"
+            onClick={handleReset}
+            disabled={!isRacing}
             className="border-danger text-danger hover:bg-danger/10 flex-1 sm:flex-none"
           >
             Reset
