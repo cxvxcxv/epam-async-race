@@ -2,9 +2,10 @@ import { ArrowDown, ArrowUp } from 'lucide-react';
 
 import { useAppDispatch, useAppSelector } from '@/app/store';
 
+import type { WinnerSortField } from '@/api/winners';
+
 import { CarIcon } from '@/shared/ui';
 
-import type { WinnerSortField } from '@/api/winners';
 import {
   selectWinners,
   selectWinnersSortBy,

@@ -1,4 +1,5 @@
 import type { WinnerSortField, WinnerSortOrder } from '@/api/winners';
+
 import type { Car, Winner } from '@/shared/types';
 
 export interface WinnerWithCar extends Winner {

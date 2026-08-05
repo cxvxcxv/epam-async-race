@@ -1,11 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+import type { RootState } from '@/app/store';
+
 import { carsApi } from '@/api/cars';
 import { winnersApi } from '@/api/winners';
 
 import { WINNERS_PAGE_SIZE } from '@/shared/constants';
 
-import type { RootState } from '@/app/store';
 import type { WinnerWithCar } from './types';
 
 export const fetchWinners = createAsyncThunk<

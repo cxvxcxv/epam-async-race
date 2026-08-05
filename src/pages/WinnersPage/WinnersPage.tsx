@@ -2,10 +2,12 @@ import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/app/store';
 
-import { WinnersPagination } from '@/features/winners/components/WinnersPagination';
-import { WinnersTable } from '@/features/winners/components/WinnersTable';
-import { selectWinnersIsLoading } from '@/features/winners/selectors';
-import { fetchWinners } from '@/features/winners/thunks';
+import {
+  WinnersPagination,
+  WinnersTable,
+  fetchWinners,
+  selectWinnersIsLoading,
+} from '@/features/winners';
 
 export function WinnersPage() {
   const dispatch = useAppDispatch();

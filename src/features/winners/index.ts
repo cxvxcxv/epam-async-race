@@ -1,3 +1,4 @@
+export * from './components';
 export * from './selectors';
 export * from './slice';
 export * from './thunks';

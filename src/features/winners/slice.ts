@@ -1,6 +1,7 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import type { WinnerSortField } from '@/api/winners';
+
 import { fetchWinners } from './thunks';
 import type { WinnersState } from './types';
 
