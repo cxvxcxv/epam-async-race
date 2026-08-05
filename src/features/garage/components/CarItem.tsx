@@ -5,6 +5,8 @@ import clsx from 'clsx';
 
 import { selectSelectedCarId } from '../selectors';
 import { CarControls } from './CarControls';
+import { FinishLine } from './FinishLine';
+import { StartLine } from './StartLine';
 
 interface Props {
   car: Car;
@@ -23,21 +25,17 @@ export function CarItem({ car }: Props) {
     >
       <CarControls car={car} />
 
-      <div className="border-primary text-primary relative flex h-full items-center justify-center border-r-2 border-dashed px-1 pl-2 text-xs font-bold tracking-widest uppercase [writing-mode:vertical-lr]">
-        Start
-      </div>
+      <StartLine />
 
       <div className="relative flex h-full flex-1 items-center overflow-hidden px-4">
-        <span className="font-orbitron pointer-events-none absolute left-28 text-4xl font-extrabold tracking-widest text-slate-400/10 select-none">
+        <span className="text-foreground/7 pointer-events-none absolute left-28 text-4xl font-extrabold tracking-widest select-none">
           {car.name}
         </span>
 
         <CarIcon color={car.color} className="h-10 w-20" />
       </div>
 
-      <div className="border-success text-success relative z-10 flex h-full items-center justify-center border-l-2 border-dashed px-1 text-xs font-bold tracking-widest [writing-mode:vertical-lr]">
-        Finish
-      </div>
+      <FinishLine />
     </div>
   );
 }
