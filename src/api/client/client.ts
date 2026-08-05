@@ -5,7 +5,6 @@ import {
   parseJson,
   serializeBody,
 } from './helpers';
-
 import type { HttpResponse, RequestOptions } from './types';
 
 export async function request<T>(

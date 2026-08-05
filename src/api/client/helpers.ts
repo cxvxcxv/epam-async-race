@@ -1,4 +1,5 @@
 import { API_BASE_URL } from '@/shared/constants';
+
 import { ApiError } from './errors';
 import type { QueryParams } from './types';
 

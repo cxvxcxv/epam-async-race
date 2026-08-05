@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/app/store';
+
 import {
   CarList,
-  fetchCars,
   GaragePagination,
   RaceControls,
+  fetchCars,
   selectCars,
   selectGarageCurrentPage,
   selectGarageTotalCount,

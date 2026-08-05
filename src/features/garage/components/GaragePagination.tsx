@@ -1,9 +1,12 @@
-import { getTotalPages } from '@/api/helpers';
-import { useAppDispatch, useAppSelector } from '@/app/store';
-import { GARAGE_PAGE_SIZE } from '@/shared/constants';
-
-import { Button } from '@/shared/ui';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+import { useAppDispatch, useAppSelector } from '@/app/store';
+
+import { getTotalPages } from '@/api/helpers';
+
+import { GARAGE_PAGE_SIZE } from '@/shared/constants';
+import { Button } from '@/shared/ui';
+
 import { selectGarageCurrentPage, selectGarageTotalCount } from '../selectors';
 import { setCurrentPage } from '../slice';
 

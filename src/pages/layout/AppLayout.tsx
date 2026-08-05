@@ -1,5 +1,6 @@
-import { ROUTES } from '@/shared/constants';
 import { NavLink, Outlet } from 'react-router';
+
+import { ROUTES } from '@/shared/constants';
 
 export function AppLayout() {
   return (

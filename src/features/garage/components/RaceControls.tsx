@@ -1,8 +1,12 @@
-import { useAppDispatch, useAppSelector } from '@/app/store';
-import { Button } from '@/shared/ui';
 import toast from 'react-hot-toast';
+
+import { useAppDispatch, useAppSelector } from '@/app/store';
+
+import { Button } from '@/shared/ui';
+
 import { selectGarageCurrentPage } from '../selectors';
 import { fetchCars, generateRandomCarsThunk } from '../thunks';
+
 import { CreateCarForm } from './CreateCarForm';
 import { UpdateCarForm } from './UpdateCarForm';
 

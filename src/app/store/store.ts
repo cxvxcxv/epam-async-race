@@ -1,5 +1,6 @@
-import { garageReducer } from '@/features/garage/slice';
 import { configureStore } from '@reduxjs/toolkit';
+
+import { garageReducer } from '@/features/garage/slice';
 
 export const store = configureStore({
   reducer: {

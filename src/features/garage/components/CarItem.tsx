@@ -1,9 +1,12 @@
-import { useAppSelector } from '@/app/store';
-import type { Car } from '@/shared/types';
-import { CarIcon } from '@/shared/ui';
 import clsx from 'clsx';
 
+import { useAppSelector } from '@/app/store';
+
+import type { Car } from '@/shared/types';
+import { CarIcon } from '@/shared/ui';
+
 import { selectSelectedCarId } from '../selectors';
+
 import { CarControls } from './CarControls';
 import { FinishLine } from './FinishLine';
 import { StartLine } from './StartLine';

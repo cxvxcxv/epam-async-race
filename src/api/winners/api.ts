@@ -1,7 +1,9 @@
 import { ENDPOINTS } from '@/shared/constants';
 import type { Winner } from '@/shared/types';
+
 import { get, post, put, remove } from '../client';
 import { getTotalCount } from '../helpers';
+
 import type {
   CreateWinnerDto,
   GetWinnersParams,

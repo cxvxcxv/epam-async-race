@@ -1,7 +1,10 @@
-import { useAppDispatch, useAppSelector } from '@/app/store';
-import { Button, Input } from '@/shared/ui';
 import { type SubmitEventHandler } from 'react';
 import toast from 'react-hot-toast';
+
+import { useAppDispatch, useAppSelector } from '@/app/store';
+
+import { Button, Input } from '@/shared/ui';
+
 import { validateName } from '../lib/validate';
 import { selectCreateDraft, selectGarageCurrentPage } from '../selectors';
 import { resetCreateDraft, updateCreateDraft } from '../slice';

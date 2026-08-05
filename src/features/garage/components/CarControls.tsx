@@ -1,7 +1,9 @@
 import { useAppDispatch, useAppSelector } from '@/app/store';
+
 import { GARAGE_PAGE_SIZE } from '@/shared/constants';
 import type { Car } from '@/shared/types';
 import { Button } from '@/shared/ui';
+
 import { selectGarageCurrentPage, selectGarageTotalCount } from '../selectors';
 import { selectCar, setCurrentPage } from '../slice';
 import { deleteCar } from '../thunks';

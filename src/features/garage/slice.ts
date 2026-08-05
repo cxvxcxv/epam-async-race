@@ -1,8 +1,10 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import type { CreateCarDto, UpdateCarDto } from '@/api/cars';
 import { getTotalPages } from '@/api/helpers/pagination';
+
 import { GARAGE_PAGE_SIZE } from '@/shared/constants';
+
 import {
   createCar,
   deleteCar,
@@ -10,7 +12,6 @@ import {
   generateRandomCarsThunk,
   updateCar,
 } from './thunks';
-
 import type { GarageState } from './types';
 
 const initialState: GarageState = {

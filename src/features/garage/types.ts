@@ -1,4 +1,5 @@
 import type { CreateCarDto, UpdateCarDto } from '@/api/cars/types';
+
 import type { Car } from '@/shared/types';
 
 export interface GarageState {

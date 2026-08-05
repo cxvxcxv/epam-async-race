@@ -1,8 +1,11 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
+
 import { carsApi } from '@/api/cars';
 import type { CreateCarDto, GetCarsResponse } from '@/api/cars/types';
 import { winnersApi } from '@/api/winners';
+
 import { GARAGE_PAGE_SIZE, RANDOM_CAR_COUNT } from '@/shared/constants';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+
 import { generateRandomCars } from './lib/randomCar';
 import type { UpdateCarPayload } from './types';
 
